@@ -43,6 +43,7 @@ class Text:
         print(self.nouns)
         print("Czasowniki w formie bezokolicznika")
         print(self.verbs)
+        print()
 
 
 
