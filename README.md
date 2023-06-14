@@ -1,3 +1,3 @@
-# Projekt w pythonie
+# Learn From Scripts in python
 
-# Zadaniem programu jest wczytanie od użytkownika skryptu filmu/ odcinka serialu, program podzieli tekst na słowa, odszuka bezokoliczniki wszystkich czasowników oraz odnajdzie podstawową formę rzeczowników, wrzuci słowa do bazy danych. Użytkownik może wyświetlić listę słów wraz z ich tłumaczeniem na polski oraz oznaczyć słowa jako znane/ nieznane, a także wylosować słowo(aby się uczyć).
+## The task of this program is to load a script from a movie/TV show episode provided by the user. The program will split the text into words, search for infinitives of all verbs, and find the base form of nouns. It will then store these words in a database. The user can display a list of words along with their Polish translations, mark words as known/unknown, and also randomly pick one word.
