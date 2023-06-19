@@ -2,29 +2,43 @@ import pysrt
 import spacy
 import sqlite3
 import tkinter as tk
+import io
 
 class Text:
     def __init__(self, file_path):
         self.file_path = file_path
         self.file_name = file_path.split(".")[0]
         self.file_extension = file_path.split(".")[-1]
-        self.to_change = {"\n\n": " ", "\n": " ", "\\": " ", "<i>": " ", "</i>": " ", ".": ". ", "?": "? ", "-": ""}
+        self.to_change = {"\n\n": " ", "\n": " ", "\\": " ", "<i>": " ", "</i>": " ", ".": " ", "?": " ", "-": " ", "%": " "}
         self.nlp = spacy.load("en_core_web_sm")
-        self.nouns = []
+        self.nouns1 = []
         self.verbs = []
         if self.file_extension == "srt": 
             self.subs = pysrt.open(file_path, encoding='iso-8859-1')
             self.process_text()
-        else: 
+        elif self.file_extension == "txt": 
+            self.subs = open(file_path)
+            self.process_text()
             print("Program obsługuje jedynie pliki .srt")
+        else:
+            print("Podałeś plik o rozszerzeniu innym niż srt lub txt.")
 
 
     def process_text(self):
         self.text = ""
-        for sub in self.subs:
-            for key, value in self.to_change.items():
-                sub.text = sub.text.replace(key, value)
-            self.text += sub.text
+        if isinstance(self.subs, pysrt.SubRipFile):
+            for sub in self.subs:
+                for key, value in self.to_change.items():
+                    sub.text = sub.text.replace(key, value)
+                self.text += sub.text
+        elif isinstance(self.subs, io.TextIOWrapper):
+            for line in self.subs:
+                for key, value in self.to_change.items():
+                    line = line.replace(key, value)
+                self.text += line
+        else:
+            print("Nieobsługiwany typ obiektu self.subs")
+
         self.analyze_text()
 
 
@@ -194,5 +208,8 @@ class Tkinter_GUI:
 
 
 if __name__ == "__main__":
+    # -- INPUT file
+    #text = Text("plik.txt")
+    # -- Run GUI
     app = Tkinter_GUI()
     app.root.mainloop()
