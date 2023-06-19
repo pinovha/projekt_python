@@ -11,7 +11,7 @@ class Text:
         self.file_extension = file_path.split(".")[-1]
         self.to_change = {"\n\n": " ", "\n": " ", "\\": " ", "<i>": " ", "</i>": " ", ".": " ", "?": " ", "-": " ", "%": " "}
         self.nlp = spacy.load("en_core_web_sm")
-        self.nouns1 = []
+        self.nouns = []
         self.verbs = []
         if self.file_extension == "srt": 
             self.subs = pysrt.open(file_path, encoding='iso-8859-1')
